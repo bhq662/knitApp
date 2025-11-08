@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
+    <title>KnitApp</title>
+</head>
+
+<body style="margin: 20px;">
+    <h1>KnitApp</h1>
+    <h4 style="margin-top: 20px; margin-bottom: 40px;">Project organization tool</h4>
+    <h5>Navigation</h5>
+    <div style="margin-bottom: 20px;">
+        <a class="btn btn-secondary" th:href="@{/projects}">View All Projects</a>
+        <a class="btn btn-outline-secondary" th:href="@{/yarns}">View All Yarns</a>
+    </div>
+    <!-- Viesti kirjautumattomille käyttäjille -->
+    <div sec:authorize="!isAuthenticated()">
+        <p>
+            As a <span style="font-weight: bold;">guest user</span>
+            you can view projects and yarns, but not edit them.<br>
+            If you'd like to edit, please sign in.
+        </p>
+    </div>
+
+    <!-- Viesti kirjautuneille käyttäjille -->
+    <div sec:authorize="isAuthenticated()">
+        <p>You have logged in as <span sec:authentication="name" style="font-weight: bold;"></span>.</p>
+    </div>
+
+    <div sec:authorize="isAuthenticated()">
+        <form th:action="@{/logout}" method="post">
+            <button type="submit" class="btn btn-outline-danger">Log Out</button>
+        </form>
+    </div>
+    <div sec:authorize="!isAuthenticated()">
+        <a class="btn btn-outline-primary" th:href="@{/signin}">Sign In</a>
+    </div>
+</body>
+
+</html>

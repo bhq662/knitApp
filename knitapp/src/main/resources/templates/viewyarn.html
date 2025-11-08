@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
+    <title>View Yarn</title>
+</head>
+
+<body>
+    <div style="margin: 20px;">
+        <h2 th:text="${yarn.yarnName}">Yarn Name</h2>
+        <table class="table table-bordered" style="width: 60%;">
+            <tr>
+                <th>Weight</th>
+                <td th:text="${yarn.yarnWeight}"></td>
+            </tr>
+            <tr>
+                <th>Colour</th>
+                <td th:text="${yarn.yarnColour}"></td>
+            </tr>
+            <tr>
+                <th>Needle Recommendation</th>
+                <td th:text="${yarn.needleRec}"></td>
+            </tr>
+            <tr>
+                <th>Gauge Recommendation</th>
+                <td th:text="${yarn.gaugeRec}"></td>
+            </tr>
+        </table>
+        <h4 style="margin-top: 20px;">Used in Projects:</h4>
+        <ul class="list-unstyled" style="margin-top: 10px; margin-bottom: 20px;">
+            <li th:each="project : ${projects}">
+                <a th:href="@{/viewproject/{id}(id=${project.projectId})}" th:text="${project.projectName}"></a>
+            </li>
+        </ul>
+        <a th:href="@{/edityarn/{id}(id=${yarn.yarnId})}" class="btn btn-outline-primary">Edit</a>
+        <a class="btn btn-primary" th:href="@{/yarns}">All Yarns</a>
+        <br><br>
+        <a class="btn btn-outline-secondary" th:href="@{/projects}">Back to all Projects</a>
+
+    </div>
+</body>
+
+</html>

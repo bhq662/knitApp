@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Yarn</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
+</head>
+
+<body>
+    <div style="margin: 20px;">
+        <h2 style="margin-bottom: 30px;">Edit Yarn</h2>
+        <form th:action="@{/edityarn/{id}(id=${yarn.yarnId})}" th:object="${yarn}" method="post">
+            <div class="mb-3">
+                <label for="yarnName" class="form-label">Name</label>
+                <input type="text" class="form-control" id="yarnName" th:field="*{yarnName}" required>
+            </div>
+            <div class="mb-3">
+                <label for="yarnWeight" class="form-label">Weight</label>
+                <input type="text" class="form-control" id="yarnWeight" th:field="*{yarnWeight}">
+            </div>
+            <div class="mb-3">
+                <label for="yarnColour" class="form-label">Colour</label>
+                <input type="text" class="form-control" id="yarnColour" th:field="*{yarnColour}">
+            </div>
+            <div class="mb-3">
+                <label for="needleRec" class="form-label">Needle Recommendation</label>
+                <input type="text" class="form-control" id="needleRec" th:field="*{needleRec}">
+            </div>
+            <div class="mb-3">
+                <label for="gaugeRec" class="form-label">Gauge Recommendation</label>
+                <input type="text" class="form-control" id="gaugeRec" th:field="*{gaugeRec}">
+            </div>
+            <div style="margin-top: 10px;">
+                <button type="submit" class="btn btn-primary">Save</button>
+                <a class="btn btn-outline-secondary" th:href="@{/viewyarn/{id}(id=${yarn.yarnId})}">Cancel</a>
+                <br><br>
+                <a class="btn btn-danger" th:href="@{/deleteyarn/{id}(id=${yarn.yarnId})}">Delete</a>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

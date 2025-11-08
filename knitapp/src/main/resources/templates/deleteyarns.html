@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
+    <title>Delete Yarn</title>
+</head>
+
+<body>
+    <div class="container mt-4">
+        <h2>Delete Yarn</h2>
+        <p>Are you sure you want to delete the yarn <strong th:text="${yarn.yarnName}">Yarn Name</strong>?</p>
+        <form th:action="@{/deleteyarn/{id}(id=${yarn.yarnId})}" method="post">
+            <button type="submit" class="btn btn-danger">Delete</button>
+            <a class="btn btn-secondary" th:href="@{/yarns}">Cancel</a>
+        </form>
+    </div>
+</body>
+
+</html>

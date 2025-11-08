@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
+    <title>View Project</title>
+</head>
+
+<body>
+    <div style="margin: 20px;">
+        <h2 th:text="${project.projectName}" style="padding-bottom: 20px;">Project Name</h2>
+        <table class="table table-bordered">
+            <tr>
+                <th>Status</th>
+                <td th:text="${project.status}"></td>
+            </tr>
+            <tr>
+                <th>Size</th>
+                <td th:text="${project.size}"></td>
+            </tr>
+            <tr>
+                <th>Category</th>
+                <td th:text="${project.category}"></td>
+            </tr>
+            <tr>
+                <th>Pattern</th>
+                <td>
+                    <a th:href="${project.pattern}" th:text="${project.pattern}" target="_blank"></a>
+
+                </td>
+            </tr>
+            <tr>
+                <th>Needles</th>
+                <td th:text="${project.needles}"></td>
+            </tr>
+            <tr>
+                <th>Yarns</th>
+                <td>
+                    <span th:each="yarn, stat : ${project.yarns}">
+                        <a th:href="@{/viewyarn/{id}(id=${yarn.yarnId})}" th:text="${yarn.yarnName}"></a>
+                        <span th:if="${!stat.last}">, </span>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <th>Gauge Size</th>
+                <td th:text="${project.gaugeSize}"></td>
+            </tr>
+            <tr>
+                <th>Notes</th>
+                <td th:text="${project.notes}"></td>
+            </tr>
+        </table>
+        <a class="btn btn-primary" th:href="@{/editproject/{id}(id=${project.projectId})}">Edit</a>
+        <a class="btn btn-danger" th:href="@{/deleteproject/{id}(id=${project.projectId})}">Delete</a>
+        <br><br>
+        <a class="btn btn-outline-primary" th:href="@{/projects}">All Projects</a>
+    </div>
+</body>
+
+</html>
