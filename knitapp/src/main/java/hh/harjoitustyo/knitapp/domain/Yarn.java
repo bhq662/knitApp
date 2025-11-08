@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Yarn {
@@ -24,6 +25,7 @@ public class Yarn {
     private List<Project> projects = new ArrayList<>();
 
     // attributes
+    @NotBlank(message = "Yarn name is required")
     private String yarnName;
     private String yarnWeight;
     private String yarnColour;

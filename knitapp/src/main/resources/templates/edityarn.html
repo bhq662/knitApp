@@ -15,6 +15,7 @@
             <div class="mb-3">
                 <label for="yarnName" class="form-label">Name</label>
                 <input type="text" class="form-control" id="yarnName" th:field="*{yarnName}" required>
+                <div class="text-danger" th:if="${#fields.hasErrors('yarnName')}" th:errors="*{yarnName}"></div>
             </div>
             <div class="mb-3">
                 <label for="yarnWeight" class="form-label">Weight</label>

@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.validation.BindingResult;
+import jakarta.validation.Valid;
 
 import hh.harjoitustyo.knitapp.domain.Yarn;
 import hh.harjoitustyo.knitapp.domain.YarnRepository;
@@ -43,7 +45,12 @@ public class YarnController {
     }
 
     @PostMapping("/edityarn/{id}")
-    public String editYarnSubmit(@PathVariable Long id, @ModelAttribute Yarn yarn) {
+    public String editYarnSubmit(@PathVariable Long id, @Valid @ModelAttribute Yarn yarn, BindingResult result,
+            Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("yarn", yarn);
+            return "edityarn";
+        }
         yarn.setYarnId(id);
         yarnRepository.save(yarn);
         return "redirect:/viewyarn/" + id;
@@ -56,8 +63,11 @@ public class YarnController {
         return "newyarn";
     }
 
-    @PostMapping("/newyarn")
-    public String saveNewYarn(@ModelAttribute Yarn yarn) {
+    public String saveNewYarn(@Valid @ModelAttribute Yarn yarn, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("yarn", yarn);
+            return "newyarn";
+        }
         yarnRepository.save(yarn);
         return "redirect:/yarns";
     }

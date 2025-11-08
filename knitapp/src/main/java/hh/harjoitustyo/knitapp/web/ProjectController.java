@@ -15,6 +15,8 @@ import hh.harjoitustyo.knitapp.domain.ProjectRepository;
 import hh.harjoitustyo.knitapp.domain.StatusRepository;
 import hh.harjoitustyo.knitapp.domain.Yarn;
 import hh.harjoitustyo.knitapp.domain.YarnRepository;
+import jakarta.validation.Valid;
+import org.springframework.validation.BindingResult;
 
 @Controller
 public class ProjectController {
@@ -64,7 +66,12 @@ public class ProjectController {
     }
 
     @PostMapping("/editproject/{id}")
-    public String editProjectSubmit(@PathVariable Long id, @ModelAttribute Project project) {
+    public String editProjectSubmit(@Valid @PathVariable Long id, @ModelAttribute Project project,
+            BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("categories", categoryRepository.findAll());
+            return "editproject";
+        }
         if (project.getYarnText() != null && !project.getYarnText().isBlank()) {
             Yarn yarn = yarnRepository.findByYarnName(project.getYarnText()).orElseGet(() -> {
                 Yarn newYarn = new Yarn();
@@ -89,7 +96,11 @@ public class ProjectController {
     }
 
     @PostMapping("/newproject")
-    public String saveNewProject(@ModelAttribute Project project) {
+    public String saveNewProject(@Valid @ModelAttribute Project project, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("categories", categoryRepository.findAll());
+            return "newproject";
+        }
         if (project.getYarnText() != null && !project.getYarnText().isBlank()) {
             Yarn yarn = yarnRepository.findByYarnName(project.getYarnText()).orElseGet(() -> {
                 Yarn newYarn = new Yarn();

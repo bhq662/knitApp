@@ -11,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Transient;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Project {
@@ -26,8 +27,10 @@ public class Project {
     private String yarnText;
 
     // attributes
+    @NotBlank(message = "Project name is required")
     private String projectName;
     private String status;
+    @NotBlank(message = "Category is required")
     private String category;
     private String size;
     private String pattern;
