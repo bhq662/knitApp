@@ -31,7 +31,11 @@ public class YarnController {
     // View a specific yarn
     @GetMapping("/viewyarn/{id}")
     public String viewYarn(@PathVariable Long id, Model model) {
-        Yarn yarn = yarnRepository.findById(id).orElse(null);
+        var yarnOpt = yarnRepository.findById(id);
+        if (yarnOpt.isEmpty()) {
+            return "redirect:/yarns";
+        }
+        Yarn yarn = yarnOpt.get();
         model.addAttribute("yarn", yarn);
         model.addAttribute("projects", yarn.getProjects());
         return "viewyarn";

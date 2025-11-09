@@ -38,17 +38,21 @@ public class ProjectController {
 
     }
 
-    // Get all projects
+    // View all projects
     @GetMapping("/projects")
     public String getProjects(Model model) {
         model.addAttribute("projects", projectRepository.findAll());
         return "allprojects"; // index.html
     }
 
-    // Get a specific project
+    // View a specific project
     @GetMapping("/viewproject/{id}")
     public String viewProject(@PathVariable Long id, Model model) {
-        model.addAttribute("project", projectRepository.findById(id).orElse(null));
+        var projectOpt = projectRepository.findById(id);
+        if (projectOpt.isEmpty()) {
+            return "redirect:/projects";
+        }
+        model.addAttribute("project", projectOpt.get());
         return "viewproject";
     }
 
@@ -71,7 +75,6 @@ public class ProjectController {
         if (result.hasErrors()) {
             model.addAttribute("categories", categoryRepository.findAll());
             model.addAttribute("statuses", statusRepository.findAll());
-
             return "editproject";
         }
         if (project.getYarnText() != null && !project.getYarnText().isBlank()) {
@@ -101,6 +104,8 @@ public class ProjectController {
     public String saveNewProject(@Valid @ModelAttribute Project project, BindingResult result, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("categories", categoryRepository.findAll());
+            model.addAttribute("statuses", statusRepository.findAll()); // <-- add statuses
+            model.addAttribute("yarns", yarnRepository.findAll()); // <-- add yarns
             return "newproject";
         }
         if (project.getYarnText() != null && !project.getYarnText().isBlank()) {
