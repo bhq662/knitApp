@@ -63,6 +63,7 @@ public class YarnController {
         return "newyarn";
     }
 
+    @PostMapping("/newyarn")
     public String saveNewYarn(@Valid @ModelAttribute Yarn yarn, BindingResult result, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("yarn", yarn);
@@ -76,7 +77,7 @@ public class YarnController {
     @GetMapping("/deleteyarn/{id}")
     public String confirmDeleteYarn(@PathVariable Long id, Model model) {
         model.addAttribute("yarn", yarnRepository.findById(id).orElse(null));
-        return "deleteyarn";
+        return "deleteyarns"; // matches deleteyarns.html
     }
 
     @PostMapping("/deleteyarn/{id}")

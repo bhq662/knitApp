@@ -66,10 +66,12 @@ public class ProjectController {
     }
 
     @PostMapping("/editproject/{id}")
-    public String editProjectSubmit(@Valid @PathVariable Long id, @ModelAttribute Project project,
+    public String editProjectSubmit(@PathVariable Long id, @Valid @ModelAttribute Project project,
             BindingResult result, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("categories", categoryRepository.findAll());
+            model.addAttribute("statuses", statusRepository.findAll());
+
             return "editproject";
         }
         if (project.getYarnText() != null && !project.getYarnText().isBlank()) {
