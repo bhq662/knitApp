@@ -14,7 +14,7 @@ public class WebSecurityConfig {
                 http.authorizeHttpRequests(authorize -> authorize
                                 // Kaikille avoimet polut
                                 .requestMatchers("/", "/index", "/login", "/css/**",
-                                                "/projects", "/yarns", "/viewproject/**", "/viewyarn/**")
+                                                "/projects", "/yarns", "/viewproject/**", "/viewyarn/**", "/api/**")
                                 .permitAll()
 
                                 // Suojatut polut
@@ -35,6 +35,9 @@ public class WebSecurityConfig {
                                 .logout(logout -> logout
                                                 .logoutSuccessUrl("/")
                                                 .permitAll());
+
+                // Tehdään api:sta saavutettava ei-selainkäyttäjille (ignore csrf for api)
+                http.csrf(csrf -> csrf.ignoringRequestMatchers("/api/**"));
 
                 return http.build();
         }
