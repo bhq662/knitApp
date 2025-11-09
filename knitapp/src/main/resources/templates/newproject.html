@@ -30,37 +30,37 @@
                     <option th:each="cat : ${categories}" th:value="${cat.categoryName}" th:text="${cat.categoryName}">
                     </option>
                 </select>
-                <div class="text-danger" th:if="${#fields.hasErrors('projecCategory')}" th:errors="*{projecCategory}">
-                </div>
+                <div class="text-danger" th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></div>
+            </div>
 
-            </div>
-            <div class="mb-3">
-                <label for="size" class="form-label">Size</label>
-                <input type="text" class="form-control" id="size" th:field="*{size}">
-            </div>
-            <div class="mb-3">
-                <label for="pattern" class="form-label">Pattern Link</label>
-                <input type="url" class="form-control" id="pattern" th:field="*{pattern}" />
-            </div>
-            <div class="mb-3">
-                <label for="yarnText" class="form-label">Yarn Used</label>
-                <input type="text" class="form-control" id="yarnText" th:field="*{yarnText}">
-            </div>
-            <div class="mb-3">
-                <label for="needles" class="form-label">Needles</label>
-                <input type="text" class="form-control" id="needles" th:field="*{needles}">
-            </div>
-            <div class="mb-3">
-                <label for="gaugeSize" class="form-label">Gauge Size</label>
-                <input type="text" class="form-control" id="gaugeSize" th:field="*{gaugeSize}">
-            </div>
-            <div class="mb-3">
-                <label for="notes" class="form-label">Notes</label>
-                <textarea class="form-control" id="notes" th:field="*{notes}"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Create</button>
-            <a class="btn btn-outline-secondary" th:href="@{/projects}">Cancel</a>
-        </form>
+    </div>
+    <div class="mb-3">
+        <label for="size" class="form-label">Size</label>
+        <input type="text" class="form-control" id="size" th:field="*{size}">
+    </div>
+    <div class="mb-3">
+        <label for="pattern" class="form-label">Pattern Link</label>
+        <input type="url" class="form-control" id="pattern" th:field="*{pattern}" />
+    </div>
+    <div class="mb-3">
+        <label for="yarnText" class="form-label">Yarn Used</label>
+        <input type="text" class="form-control" id="yarnText" th:field="*{yarnText}">
+    </div>
+    <div class="mb-3">
+        <label for="needles" class="form-label">Needles</label>
+        <input type="text" class="form-control" id="needles" th:field="*{needles}">
+    </div>
+    <div class="mb-3">
+        <label for="gaugeSize" class="form-label">Gauge Size</label>
+        <input type="text" class="form-control" id="gaugeSize" th:field="*{gaugeSize}">
+    </div>
+    <div class="mb-3">
+        <label for="notes" class="form-label">Notes</label>
+        <textarea class="form-control" id="notes" th:field="*{notes}"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+    <a class="btn btn-outline-secondary" th:href="@{/projects}">Cancel</a>
+    </form>
 </body>
 
 </html>
