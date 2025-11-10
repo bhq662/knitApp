@@ -42,7 +42,7 @@ public class ProjectController {
     @GetMapping("/projects")
     public String getProjects(Model model) {
         model.addAttribute("projects", projectRepository.findAll());
-        return "allprojects"; // index.html
+        return "allprojects";
     }
 
     // View a specific project
@@ -104,8 +104,8 @@ public class ProjectController {
     public String saveNewProject(@Valid @ModelAttribute Project project, BindingResult result, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("categories", categoryRepository.findAll());
-            model.addAttribute("statuses", statusRepository.findAll()); // <-- add statuses
-            model.addAttribute("yarns", yarnRepository.findAll()); // <-- add yarns
+            model.addAttribute("statuses", statusRepository.findAll()); // add statuses
+            model.addAttribute("yarns", yarnRepository.findAll()); // add yarns
             return "newproject";
         }
         if (project.getYarnText() != null && !project.getYarnText().isBlank()) {
